@@ -14,11 +14,15 @@ public class Main {
         Website page = new Website(url, getDate(), fetcher.getWebsiteTitle(url));
         page.setHtml(fetcher.fetchWebsite(page.getUrl()));
         page.setLinks(fetcher.getLinksFromWebsite(page.getUrl()));
-        output(page.getLinks().toString());
-        wb.saveWebsite(page);
+        fetcher.fetchChildren(page, "https://t3n.de/news/", "/page/");
+//        for (Website w:
+//             page.getChildren()) {
+//            output(w.getTitle());
+//        }
+        //wb.saveWebsite(page);
     }
 
-    private static void output(String s) {
+    static void output(String s) {
         System.out.println(s);
     }
 
