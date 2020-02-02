@@ -9,6 +9,7 @@ public class Website {
     private List<String> links;
     private String fetchedOnDate;
     private StringBuilder html;
+    private List<Website> children;
 
     Website(String url, String fetchedOnDate, String title) {
         this.url = url;
@@ -66,5 +67,13 @@ public class Website {
 
     public void setHtml(StringBuilder html) {
         this.html = html;
+    }
+
+    public List<Website> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Website> websites) {
+        this.children = websites;
     }
 }
