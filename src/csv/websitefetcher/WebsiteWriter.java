@@ -13,11 +13,13 @@ public class WebsiteWriter {
     }
 
     private String prepareTitle(String pageTitle) {
-        String newPageTitle = pageTitle.replace(".", "");
-        newPageTitle = newPageTitle.replace("-", "");
-        newPageTitle = newPageTitle.replace("–", "");
-        newPageTitle = newPageTitle.replace("|", "");
-        newPageTitle = newPageTitle.replace("  ", "-");
+        String newPageTitle = pageTitle.toLowerCase().replace("ö", "oe");
+        newPageTitle = newPageTitle.replace("ä", "ae");
+        newPageTitle = newPageTitle.replace("ü", "ue");
+        newPageTitle = newPageTitle.replace("ß", "ss");
+        newPageTitle = newPageTitle.replaceAll("[^A-Za-z0-9]", " ");
+        newPageTitle = newPageTitle.replace("   ", "");
+        newPageTitle = newPageTitle.replace("  ", "");
         newPageTitle = newPageTitle.replace(" ", "-");
         return newPageTitle;
     }
