@@ -39,6 +39,7 @@ public class Fetcher {
         List<String> links = filter(website.getLinks(), includeKeywords, excludedKeywords, website);
         List<Website> websites = new ArrayList<>();
         for (String s : links) {
+            // Main.output(s);
             websites.add(new Website(s, getFetchedOnDate(), getWebsiteTitle(s)));
         }
         website.setChildren(websites);
@@ -50,12 +51,16 @@ public class Fetcher {
             String sLowerCase = s.toLowerCase();
             if (containsKeywords(sLowerCase, includeKeywords)
                     && !containsKeywords(sLowerCase, excludeKeywords)
+                    && !s.equals(website.getUrl())
             ) {
                 filteredList.add(s);
             }
         }
+        filteredList = Utils.removeDuplicatesFromList(filteredList);
+        //Main.output(filteredList.toString());
         return filteredList;
     }
+
 
     private boolean containsKeywords(String sLowerCase, String[] keywords) {
         for (String s : keywords) {

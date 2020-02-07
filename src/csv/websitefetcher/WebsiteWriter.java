@@ -1,14 +1,24 @@
 package csv.websitefetcher;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class WebsiteWriter {
 
     public void saveWebsite(Website website) throws IOException {
+        String directoryName = "files";
         String filename = website.getFetchedOnDate() + "_" + prepareTitle(website.getTitle());
-        PrintWriter outputFile = new PrintWriter("files\\" + filename + ".html");
+        File directory = new File(directoryName);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        File file = new File(directoryName + "/" + filename + ".html");
+        //Main.output(filename);
+        PrintWriter outputFile = new PrintWriter(file);
+        // Main.output(website.getHtml().toString());
         outputFile.append(website.getHtml().toString());
+
         outputFile.close();
     }
 
