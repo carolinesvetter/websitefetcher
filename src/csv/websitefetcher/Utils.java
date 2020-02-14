@@ -1,7 +1,10 @@
 package csv.websitefetcher;
 
+import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 class Utils {
 
@@ -14,5 +17,18 @@ class Utils {
         }
 
         return newList;
+    }
+
+
+    public static List<File> getAllFiles(final File folder) {
+        List<File> files = new ArrayList<>();
+        for (final File fileEntry : Objects.requireNonNull(folder.listFiles())) {
+            if (fileEntry.isDirectory()) {
+                getAllFiles(fileEntry);
+            } else {
+                files.add(fileEntry);
+            }
+        }
+        return files;
     }
 }
