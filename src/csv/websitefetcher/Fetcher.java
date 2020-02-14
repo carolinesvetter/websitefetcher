@@ -76,4 +76,10 @@ public class Fetcher {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         return dateFormat.format(date);
     }
+
+    public void getHTMLForChildren(Website website) throws IOException {
+        for (Website w : website.getChildren()) {
+            w.setHtml(this.fetchWebsite(website.getUrl()));
+        }
+    }
 }

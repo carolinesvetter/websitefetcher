@@ -6,14 +6,9 @@ import java.io.PrintWriter;
 
 public class WebsiteWriter {
 
-    public void saveWebsite(Website website) throws IOException {
-        String directoryName = "files";
+    public void saveWebsite(Website website, File directory) throws IOException {
         String filename = website.getFetchedOnDate() + "_" + prepareTitle(website.getTitle());
-        File directory = new File(directoryName);
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-        File file = new File(directoryName + "/" + filename + ".html");
+        File file = new File(directory.getName() + "/" + filename + ".html");
         //Main.output(filename);
         PrintWriter outputFile = new PrintWriter(file);
         // Main.output(website.getHtml().toString());
@@ -32,5 +27,12 @@ public class WebsiteWriter {
         newPageTitle = newPageTitle.replace("  ", "");
         newPageTitle = newPageTitle.replace(" ", "-");
         return newPageTitle;
+    }
+
+
+    public void getHTMLForChildren(Website website, File directory) throws IOException {
+        for (Website w : website.getChildren()) {
+            this.saveWebsite(w, directory);
+        }
     }
 }
